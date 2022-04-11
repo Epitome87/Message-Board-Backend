@@ -5,7 +5,7 @@ const auth = async (req, res, next) => {
   try {
     // Get the value of the token from the Authorization Header
     const token = req.header('Authorization').replace('Bearer ', '');
-    const decoded = jwt.verify(token, 'thisisasecret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Our Token's payload stores our User ID
     // So check if this Token is part of our User's Tokens field

@@ -58,7 +58,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     throw new Error('Unable to login');
   }
 
-  const isMatch = await bcrupt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password);
 
   // Password incorrect?
   if (!isMatch) {
@@ -96,4 +96,6 @@ userSchema.pre('remove', async function (next) {
   next();
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config();
 const connectDatabase = require('./config/database');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const postRouter = require('./routes/postRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
 const PORT = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 // Use our routers
 app.use('/api/users', userRouter);
 app.use('/api/comments', commentRouter);
+app.use('/api/posts', postRouter);
 
 // Use a custom error handler middleware to replace Express' default
 // It's important for this to come AFTER our routers!
