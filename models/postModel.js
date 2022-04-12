@@ -10,7 +10,8 @@ const postSchema = mongoose.Schema(
       type: String,
       required: [true, 'A post must have a title'],
       minLength: 5,
-      maxLength: 50,
+      // maxLength: 50,
+      // TODO: Probably should max length this!
     },
     // TODO: Should a Post have a 'body' associated with it?
     // Or should the Original Poster's message simply be the first item in the Comments array?
@@ -30,12 +31,16 @@ const postSchema = mongoose.Schema(
     // This way, we can get the count with likes.length
     // And also quickly determine if a User liked a post (to appropriately render an up or down arrow by a Post)
     likes: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: 'User',
+      type: String,
+      default: 0,
     },
     dislikes: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: 'User',
+      type: String,
+      default: 0,
     },
   },
   { timestamps: true }
