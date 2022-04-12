@@ -21,8 +21,16 @@ const commentSchema = mongoose.Schema(
       minLength: 10,
       maxLength: 1000,
     },
-    // TODO: Will a Comment need a reference to a 'parent' Comment?
-    // This may be necessary if I support Comment nesting
+    // TODO: This might be an object with a count / list of Users
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    // TODO: This might be an object with a count / list of Users
+    dislikes: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
