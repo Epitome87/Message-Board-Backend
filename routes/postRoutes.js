@@ -14,15 +14,11 @@ const {
 const { setComment, getComments } = require('../controllers/commentController');
 
 // Routes found at 'api/posts'
-router.route('/').get(getPosts);
+router.route('/').get(getPosts).post(setPost);
 
 // Routes found at '/api/posts/:id'
-router
-  .route('/:id')
-  .get(getPost)
-  .delete(deletePost)
-  .put(updatePost)
-  .post(setPost);
+router.route('/:id').get(getPost).delete(deletePost).put(updatePost);
+// .post(setPost);
 
 router.route('/:postId/comments/').get(getPostWithComments).post(setComment);
 
