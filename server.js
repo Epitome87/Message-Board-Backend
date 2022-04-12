@@ -7,6 +7,10 @@ const commentRouter = require('./routes/commentRoutes');
 const postRouter = require('./routes/postRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
+// Temp
+const Comment = require('./models/commentModel');
+const Post = require('./models/postModel');
+
 const PORT = process.env.PORT || 5000;
 
 // Connect to our MongoDB database
@@ -21,6 +25,14 @@ app.use(cors());
 // Required to parse the body of a request
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.get('/deleteAll', async (req, res) => {
+  // TODO: Why won't this code work in addToDatabase.js?! Am I dumb?!
+  Comment.remove({}).then(console.log('LOL'));
+  await Post.deleteMany({});
+
+  res.status(200).send();
+});
 
 // Use our routers
 app.use('/api/users', userRouter);
