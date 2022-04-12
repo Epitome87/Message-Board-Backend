@@ -6,19 +6,17 @@ const asyncHandler = require('express-async-handler');
 // @access Public
 const getPostWithComments = asyncHandler(async (req, res) => {
   // Get the post with the ID provided as a param
-  const post = await Post.findOne({ _id: req.params.postId }).populate(
-    'comments'
-  );
+  // const postWithComments = await Post.findOne({
+  //   _id: req.params.postId,
+  // }).populate('comments');
 
-  //   This way didn't seem to work ('populate not defined')
-  // And now populate its Comments field!
-  //   await post.populate({
-  //     path: 'comments',
-  //   });
+  const postWithComments = await Post.findOne({
+    _id: req.params.postId,
+  }).populate({ path: 'comments', populate: { path: 'userRef' } });
 
-  console.log(post);
+  console.log(postWithComments);
 
-  res.status(200).json(post);
+  res.status(200).json(postWithComments);
 });
 
 // @desc Get Posts

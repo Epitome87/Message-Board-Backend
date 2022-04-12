@@ -17,7 +17,22 @@ const getUser = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
+const setUser = asyncHandler(async (req, res) => {
+  const { username, name, imageUrl } = req.body;
+
+  const user = new User({
+    username,
+    name,
+    imageUrl,
+  });
+
+  await user.save();
+
+  res.status(200).json(user);
+});
+
 module.exports = {
   getUsers,
   getUser,
+  setUser,
 };

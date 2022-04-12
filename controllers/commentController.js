@@ -47,10 +47,19 @@ const setComment = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
   // Destructure the relevant Comment data from the body of the request
-  const { author, body } = req.body;
+  const { userRef, author, body } = req.body;
+
+  // TODO: Get the User_.id of the currently authorized / signedin user
+  // For now, let's hard-code some User's ID
+  // const userID = '62369e306aca946099277fee';
 
   // Create and save the actual Comment
-  const comment = await Comment.create({ author, body, post: postId });
+  const comment = await Comment.create({
+    userRef,
+    author,
+    body,
+    post: postId,
+  });
 
   // Due to our two-way relationship in the database, let's also manually add this Comment to the appropriate Post
   const post = await Post.findById(postId);
@@ -74,7 +83,7 @@ const updateComment = asyncHandler(async (req, res) => {
     throw new Error('Comment not found');
   }
 
-  // Pass in options with kew of "new" set to true -- so we create the document in database if it does not exist
+  // Pass in options with key of "new" set to true -- so we create the document in database if it does not exist
   const updatedComment = await Comment.findByIdAndUpdate(id, req.body, {
     new: true,
   });

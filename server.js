@@ -10,6 +10,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 // Temp
 const Comment = require('./models/commentModel');
 const Post = require('./models/postModel');
+const User = require('./models/userModel');
 
 const PORT = process.env.PORT || 5000;
 
